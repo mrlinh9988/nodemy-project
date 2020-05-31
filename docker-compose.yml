@@ -5,7 +5,7 @@ services:
     restart: always
     build: ./nginx
     ports:
-      - '8888:80'
+      - '80:80'
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
   client:
@@ -15,6 +15,13 @@ services:
       - ./nodemy-webapp:/app
     ports:
       - '3000:3000'
+  # client-online:
+  #   build: ./project3-nodemy
+  #   ports: 
+  #     - '3001:3001'
+  #   volumes:
+  #     - /app/node_modules
+  #     - ./project3-nodemy:/app
   api-server:
     restart: always
     build: ./nodemy-server
@@ -55,6 +62,7 @@ services:
       - mongodb
       - redis
     volumes:
+      - /app/node_modules
       - ./learning-online-course:/app
   redis:
     restart: unless-stopped
